@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin View - Twinkle</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fafafa;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h2 {
+      color: maroon;
+      margin-bottom: 30px;
+    }
+
+    .ticket-list {
+      max-width: 700px;
+      margin: auto;
+      background-color: #fff9f9;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #ccc;
+      font-size: 1.1em;
+      text-align: left;
+    }
+
+    .ticket-list p {
+      margin: 12px 0;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 30px;
+      border-collapse: collapse;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: maroon;
+      color: white;
+    }
+
+    td {
+      background-color: #f9f9f9;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 1.2em;
+      color: maroon;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Admin View - Booked Tickets</h2>
+
+  <div class="ticket-list">
+    <h3>Booked Tickets</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Ticket ID</th>
+          <th>Name</th>
+          <th>Seat Number</th>
+          <th>Pickup</th>
+          <th>Drop</th>
+        </tr>
+      </thead>
+      <tbody id="ticketTable">
+        <!-- Booked ticket details will be inserted here -->
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <p>Total Remaining Seats: <span id="remainingSeats"></span></p>
+  </div>
+
+  <script>
+    // Fetch booked tickets from localStorage
+    const bookedTickets = JSON.parse(localStorage.getItem('bookedTickets')) || [];
+    const ticketTable = document.getElementById('ticketTable');
+    const remainingSeats = document.getElementById('remainingSeats');
+    
+    // Display booked tickets in the table
+    bookedTickets.forEach(ticket => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${ticket.id}</td>
+        <td>${ticket.name}</td>
+        <td>${ticket.seat}</td>
+        <td>${ticket.pickup}</td>
+        <td>${ticket.drop}</td>
+      `;
+      ticketTable.appendChild(row);
+    });
+
+    // Calculate and display the remaining seats
+    const totalSeats = 45;
+    const bookedSeats = bookedTickets.length;
+    const remaining = totalSeats - bookedSeats;
+    remainingSeats.textContent = remaining;
+  </script>
+
+</body>
+</html>
