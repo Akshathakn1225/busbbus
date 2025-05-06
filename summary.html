@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Booking Summary - Twinkle</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fef5f5;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h2 {
+      color: maroon;
+    }
+
+    .summary-box {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #fff8f8;
+      padding: 25px;
+      border-radius: 10px;
+      font-size: 1.1em;
+      text-align: left;
+    }
+
+    .summary-box p {
+      margin: 15px 0;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 12px 25px;
+      font-size: 1em;
+      background-color: maroon;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: darkred;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Booking Summary</h2>
+
+  <div class="summary-box" id="summaryBox">
+    <!-- Booking details will be inserted here -->
+  </div>
+
+  <button onclick="proceedToPayment()">Proceed to Payment</button>
+
+  <script>
+    const summaryBox = document.getElementById('summaryBox');
+
+    const name = sessionStorage.getItem('name');
+    const phone = sessionStorage.getItem('phone');
+    const email = sessionStorage.getItem('email');
+    const seat = sessionStorage.getItem('selectedSeat');
+    const pickup = sessionStorage.getItem('pickup');
+    const drop = sessionStorage.getItem('drop');
+
+    summaryBox.innerHTML = `
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Seat Number:</strong> ${seat}</p>
+      <p><strong>Pickup Point:</strong> ${pickup}</p>
+      <p><strong>Drop Point:</strong> ${drop}</p>
+    `;
+
+    function proceedToPayment() {
+      window.location.href = 'payment.html';
+    }
+  </script>
+
+</body>
+</html>
