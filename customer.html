@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Customer Details - Twinkle</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f0f0;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h2 {
+      color: maroon;
+    }
+
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #fff6f6;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    input, select {
+      width: 90%;
+      padding: 10px;
+      margin: 12px 0;
+      border-radius: 8px;
+      border: 1px solid #aaa;
+      font-size: 1em;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 1em;
+      background-color: maroon;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: darkred;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Enter Your Details</h2>
+
+  <form id="customerForm">
+    <input type="text" id="name" placeholder="Full Name" required>
+    <input type="tel" id="phone" placeholder="Phone Number" required>
+    <input type="email" id="email" placeholder="Email" required>
+
+    <select id="pickup">
+      <option value="">Select Pickup Point</option>
+      <option>Bengaluru</option>
+      <option>Nelamangala</option>
+      <option>Tumakuru</option>
+      <option>Chitradurga</option>
+    </select>
+
+    <select id="drop">
+      <option value="">Select Drop Point</option>
+      <option>Udupi</option>
+      <option>Surathkal</option>
+      <option>Mangaluru</option>
+    </select>
+
+    <button type="submit">Next</button>
+  </form>
+
+  <script>
+    document.getElementById('customerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Collect and store values in sessionStorage
+      sessionStorage.setItem('name', document.getElementById('name').value);
+      sessionStorage.setItem('phone', document.getElementById('phone').value);
+      sessionStorage.setItem('email', document.getElementById('email').value);
+      sessionStorage.setItem('pickup', document.getElementById('pickup').value);
+      sessionStorage.setItem('drop', document.getElementById('drop').value);
+
+      // Go to the summary page
+      window.location.href = 'summary.html';
+    });
+  </script>
+
+</body>
+</html>
