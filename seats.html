@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Select Your Seat - Twinkle</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff5f5;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h2 {
+      color: maroon;
+    }
+
+    .seats {
+      display: grid;
+      grid-template-columns: repeat(4, 80px);
+      gap: 15px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .seat {
+      width: 70px;
+      height: 70px;
+      border-radius: 10px;
+      background-color: lightgreen;
+      border: 2px solid #444;
+      font-size: 1.1em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .seat.booked {
+      background-color: tomato;
+      cursor: not-allowed;
+    }
+
+    .seat.selected {
+      background-color: #ffcc00;
+    }
+
+    #proceedBtn {
+      margin-top: 40px;
+      padding: 12px 25px;
+      font-size: 1em;
+      background-color: maroon;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #proceedBtn:hover {
+      background-color: darkred;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Select Your Seat (2+2 Layout)</h2>
+
+  <div class="seats" id="seatContainer">
+    <!-- Seats will be inserted here by JS -->
+  </div>
+
+  <button id="proceedBtn" onclick="goToCustomerPage()">Continue</button>
+
+  <script>
+    const seatContainer = document.getElementById('seatContainer');
+    const totalSeats = 15;
+    const bookedSeats = [3, 7, 12]; // You can change this for testing
+
+    for (let i = 1; i <= totalSeats; i++) {
+      const seat = document.createElement('div');
+      seat.classList.add('seat');
+      seat.innerText = i;
+
+      if (bookedSeats.includes(i)) {
+        seat.classList.add('booked');
+      } else {
+        seat.addEventListener('click', () => {
+          document.querySelectorAll('.seat').forEach(s => s.classList.remove('selected'));
+          seat.classList.add('selected');
+          sessionStorage.setItem('selectedSeat', i);
+        });
+      }
+
+      seatContainer.appendChild(seat);
+    }
+
+    function goToCustomerPage() {
+      const selectedSeat = sessionStorage.getItem('selectedSeat');
+      if (!selectedSeat) {
+        alert('Please select a seat!');
+      } else {
+        window.location.href = 'customer.html';
+      }
+    }
+  </script>
+
+</body>
+</html>
