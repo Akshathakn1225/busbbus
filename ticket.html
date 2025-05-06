@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ticket Receipt - Twinkle</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fef6f6;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .ticket-box {
+      background-color: #fff0f0;
+      max-width: 500px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #ccc;
+      font-size: 1.1em;
+    }
+
+    h2 {
+      color: maroon;
+      margin-bottom: 20px;
+    }
+
+    .ticket-box p {
+      margin: 12px 0;
+    }
+
+    .ticket-id {
+      font-weight: bold;
+      font-size: 1.2em;
+      color: darkred;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 10px 25px;
+      font-size: 1em;
+      background-color: maroon;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: darkred;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ticket-box">
+    <h2>🎫 Ticket Confirmed!</h2>
+
+    <p class="ticket-id">Ticket ID: <span id="ticketId"></span></p>
+    <p><strong>Name:</strong> <span id="name"></span></p>
+    <p><strong>Seat Number:</strong> <span id="seat"></span></p>
+    <p><strong>Pickup Point:</strong> <span id="pickup"></span></p>
+    <p><strong>Drop Point:</strong> <span id="drop"></span></p>
+    <p><strong>Fare Paid:</strong> ₹500</p>
+
+    <button onclick="window.location.href='index.html'">Back to Home</button>
+  </div>
+
+  <script>
+    // Generate random ticket ID
+    const ticketId = "TWK" + Math.floor(Math.random() * 90000 + 10000);
+
+    document.getElementById('ticketId').textContent = ticketId;
+    document.getElementById('name').textContent = sessionStorage.getItem('name');
+    document.getElementById('seat').textContent = sessionStorage.getItem('selectedSeat');
+    document.getElementById('pickup').textContent = sessionStorage.getItem('pickup');
+    document.getElementById('drop').textContent = sessionStorage.getItem('drop');
+
+    // Save data for admin viewing (simulate backend)
+    const ticketData = {
+      id: ticketId,
+      name: sessionStorage.getItem('name'),
+      seat: sessionStorage.getItem('selectedSeat'),
+      pickup: sessionStorage.getItem('pickup'),
+      drop: sessionStorage.getItem('drop')
+    };
+
+    let bookedTickets = JSON.parse(localStorage.getItem('bookedTickets')) || [];
+    bookedTickets.push(ticketData);
+    localStorage.setItem('bookedTickets', JSON.stringify(bookedTickets));
+  </script>
+
+</body>
+</html>
